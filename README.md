@@ -1,3 +1,12 @@
+# BattDeg
+
+## Usecases for the project
+
+* To predict the degradation in a lithium-ion battery using the few cycles of usage. 
+
+
+## Forked from Shablona
+
 ## shablona
 [![Build Status](https://travis-ci.org/uwescience/shablona.svg?branch=master)](https://travis-ci.org/uwescience/shablona)
 
