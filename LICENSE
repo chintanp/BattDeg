@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 The MIT License (MIT)
 
 Copyright (c) 2015 Ariel Rokem, The University of Washington eScience Institute
+=======
+MIT License
+
+Copyright (c) 2019 Chintan Pathak
+>>>>>>> fe2d10600fe6d5743c87fb89dbd450b77fd54cfe
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -17,4 +23,9 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+<<<<<<< HEAD
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+=======
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+>>>>>>> fe2d10600fe6d5743c87fb89dbd450b77fd54cfe

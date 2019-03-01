@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BattDeg
 
 ## Usecases for the project
@@ -516,3 +517,6 @@ your needs.
 
 At this point, make another commit, and continue to develop your own code based
 on this template.
+=======
+# BattDeg
+>>>>>>> fe2d10600fe6d5743c87fb89dbd450b77fd54cfe
