@@ -111,3 +111,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 >>>>>>> fe2d10600fe6d5743c87fb89dbd450b77fd54cfe
+
+
+# Ignore the data files
+data/
