@@ -5,6 +5,8 @@
 
 * To predict the degradation in a lithium-ion battery using the few cycles of usage. 
 
+## Components
+
 
 ## Forked from Shablona
 
