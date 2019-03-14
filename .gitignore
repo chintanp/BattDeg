@@ -115,3 +115,6 @@ venv.bak/
 
 # Ignore the data files
 data/
+
+# Ignore node_modules 
+node_modules/

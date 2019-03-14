@@ -1,0 +1,24 @@
+{
+  "name": "BattDeg",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-shell": "*"
+  },
+  "description": "Predict battery degradation",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chintanp/BattDeg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chintanp/BattDeg/issues"
+  },
+  "homepage": "https://github.com/chintanp/BattDeg#readme"
+}
