@@ -18,8 +18,9 @@ from battdeg import PL_samples_file_joiner
 
 # Path for data for testing
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-data_path = join(base_dir, 'data')
-data_path_pl12_14 = join(data_path, 'PL 12,14')
+module_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+data_path = join(module_dir, 'data')
+data_path_pl12_14 = data_path
 
 ###########################################################################
 ####################### Tests for `PL_samples_file_joiner` ################
