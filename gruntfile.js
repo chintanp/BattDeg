@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       tasks: ['shell'], 
       options: {
         cwd: {
-          files: 'BattDeg/'
+          files: 'battdeg/'
         }
       }
     },

@@ -8,17 +8,12 @@ from os.path import isfile, join
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pytest # automatic test finder and test runner
-    
-import hypothesis.strategies as st
-from hypothesis import assume, given, settings, Verbosity
-from hypothesis.strategies import integers as ints
-from hypothesis.extra.pandas import column, data_frames, indexes, range_indexes, columns
 
 # To import files from the parent directory 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import BattDeg as bd
-from BattDeg import PL_samples_file_joiner
+import battdeg as bd
+from battdeg import PL_samples_file_joiner
 
 
 # Path for data for testing
@@ -31,7 +26,7 @@ data_path_pl12_14 = join(data_path, 'PL 12,14')
 ###########################################################################
 
 # This test will test the function `PL_samples_file_joiner` for bad input
-def test_PL_PL_samples_file_joiner_BadIn():
+def test_PL_samples_file_joiner_BadIn():
     
     # Inputs with wrong type for data_dir
     dd1 = 123
@@ -89,5 +84,7 @@ def test_PL_samples_file_joiner_Type():
     # Run the function with these inputs 
     result = PL_samples_file_joiner(dd1, fnf1, file_indices1)
     
+    # Check if the output is of type pd.DataFrame
+    assert isinstance(result, pd.DataFrame), "The type of the return value is not of type Pandas.DataFrame"
     
     return 

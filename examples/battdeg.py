@@ -8,24 +8,6 @@ from os.path import isfile, join
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#@profile 
-def date_time_converter(date_time_list):
-    """ 
-    This function gets the numpy array with date_time in matlab format 
-    and returns a numpy array with date_time in human readable format. 
-    """
-    
-    # Empty array to hold the results
-    date_time_human = []
-    
-    for i in date_time_list:
-         date_time_human.append(datetime.datetime.fromordinal(int(i)) + 
-        datetime.timedelta(days=i%1) - datetime.timedelta(days = 366))
-    
-    return date_time_human 
-
-    
-#@profile
 def PL_samples_file_joiner(data_dir, file_name_format, ignore_file_indices):
     """
     This function reads in the data for PL Samples experiment and returns a 
@@ -69,12 +51,12 @@ def PL_samples_file_joiner(data_dir, file_name_format, ignore_file_indices):
     dict_files = {}
     
     # Iterate over all the files of certain type and get the file number from them
-    for filename in onlyfiles:
-        if exp_name in filename:
+    for i in range(len(onlyfiles)):
+        if exp_name in onlyfiles[i]:
             # Extract the filenumber from the name
-            file_number = re.search(exp_name + '\((.+?)\).csv', filename).group(1)
+            file_number = re.search(exp_name + '\((.+?)\).csv', onlyfiles[i]).group(1)
             # Give a value of dataframe to each key
-            dict_files[int(file_number)] = pd.read_csv(join(data_dir, filename))
+            dict_files[int(file_number)] = pd.read_csv(join(data_dir, onlyfiles[i]))
     
     # Empty dictionary to hold the ordered dictionaries
     dict_ordered = {}
@@ -98,21 +80,15 @@ def PL_samples_file_joiner(data_dir, file_name_format, ignore_file_indices):
             df_out = pd.concat([df_out, df_next])
         else:
             df_next = dict_ord_cycling_data[k]
-            df_next['Cycle'] = np.array(df_next['Cycle']) + max(np.array(df_out['Cycle']))
-            df_next['Time_sec'] = np.array(df_next['Time_sec']) + max(np.array(df_out['Time_sec']))
-            df_next['Charge_Ah'] = np.array(df_next['Charge_Ah']) + max(np.array(df_out['Charge_Ah']))
-            df_next['Discharge_Ah'] = np.array(df_next['Discharge_Ah']) + max(np.array(df_out['Discharge_Ah']))
+            df_next['Cycle'] = df_next['Cycle'] + max(df_out['Cycle'])
+            df_next['Time_sec'] = df_next['Time_sec'] + max(df_out['Time_sec'])
+            df_next['Charge_Ah'] = df_next['Charge_Ah'] + max(df_out['Charge_Ah'])
+            df_next['Discharge_Ah'] = df_next['Discharge_Ah'] + max(df_out['Discharge_Ah'])
             df_out = pd.concat([df_out, df_next])
-     
-    ####
-    # This has been commented out for performance, as we do not need date_time
-    ####
+      
     # Convert the Date_Time from matlab datenum to human readable Date_Time
-    # First convert the series into a numpy array 
-    # date_time_matlab = df_out['Date_Time'].tolist()
-
-    # # Apply the conversion to the numpy array
-    # df_out['Date_Time_new'] =  date_time_converter(date_time_matlab)
+    df_out['Date_Time_new'] = df_out['Date_Time'].apply(lambda x: datetime.datetime.fromordinal(int(x)) + 
+    datetime.timedelta(days=x%1) - datetime.timedelta(days = 366)  )
     
     # Reset the index and drop the old index
     df_out_indexed = df_out.reset_index(drop=True)
