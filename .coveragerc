@@ -1,7 +1,7 @@
 [run]
 branch = True
-source = shablona/*
-include = shablona/*
+source = battdeg/*
+include = battdeg/*
 omit = */setup.py
 [report]
-include = shablona/*
+include = battdeg/*
