@@ -115,6 +115,8 @@ venv.bak/
 
 # Ignore the data files
 data/
+# DO not ignore the data files in battdeg
+!battdeg/data
 
 # Ignore node_modules 
 node_modules/
