@@ -4,5 +4,3 @@ omit =
     */site-packages/nose/*
     *__init__*
     */setup.py
-exclude_lines =
-if __name__ == .__main__.:
