@@ -84,13 +84,6 @@ def file_name_sorting(file_name_list):
     # Splitting the file name into different columns
     fn['cell_type'],fn['cell_num'],fn['month'],fn['day'],fn['year'] = fn['file_name'].str.split('_', 4).str
     fn['year'], fn['ext'] = fn['year'].str.split('.',1).str
-    # Converting the split strings into integers for further formatting
-    fn.month = fn.month.astype(int)
-    fn.day = fn.day.astype(int)
-    fn.year = fn.year.astype(int)
-    fn['year'].replace(11,2011,inplace=True)
-    fn['year'].replace(12,2012,inplace=True)
-    fn['year'].replace(10,2010,inplace=True)
     fn['date']=''
     # Merging the year, month and date column to create a string for DateTime object.
     fn['date']= fn['year'].map(str)+fn['month'].map(str)+fn['day'].map(str)
@@ -145,10 +138,10 @@ def concat_df(df_dict):
             df_concat = pd.concat([df_concat, df_next])
         else:
             df_next = df_dict[k]
-            df_next['Cycle_Index'] = df_next['Cycle_Index'] + max(df_concat['Cycle_Index'])
-            df_next['Test_Time(s)'] = df_next['Test_Time(s)'] + max(df_concat['Test_Time(s)'])
-            df_next['Charge_Capacity(Ah)'] = df_next['Charge_Capacity(Ah)'] + max(df_concat['Charge_Capacity(Ah)'])
-            df_next['Discharge_Capacity(Ah)'] = df_next['Discharge_Capacity(Ah)'] + max(df_concat['Discharge_Capacity(Ah)'])
+            df_next['Cycle_Index'] = np.array(df_next['Cycle_Index'])+ max(np.array(df_concat['Cycle_Index']))
+            df_next['Test_Time(s)'] = np.array(df_next['Test_Time(s)']) + max(np.array(df_concat['Test_Time(s)']))
+            df_next['Charge_Capacity(Ah)'] = np.array(df_next['Charge_Capacity(Ah)']) + max(np.array(df_concat['Charge_Capacity(Ah)']))
+            df_next['Discharge_Capacity(Ah)'] = np.array(df_next['Discharge_Capacity(Ah)']) + max(np.array(df_concat['Discharge_Capacity(Ah)']))
             df_concat = pd.concat([df_concat, df_next])
     # Reset the index and drop the old index
     df_reset = df_concat.reset_index(drop=True)
@@ -170,9 +163,7 @@ def capacity(df):
     """
     # Grouping rows by the cycle index.
     group = df.groupby(['Cycle_Index']).count()
-#     group['Cumu_count'] = pd.Series(np.random.randn(len(group)), index=group.index)
-#     group['Cumu_count'] = group['Data_Point'].cumsum()
-    
+
     # Get the indices when a cycle starts
     cycle_start_indices = group['Data_Point'].cumsum()
     
@@ -208,18 +199,4 @@ def capacity(df):
     # hopefully get over it. We can come back and correct this. 
     df['capacity_ah'] = charge_ah - discharge_ah
 
-    
-    # Calculating charge and discharge for individual columns from cumulative data.
-#     df['Charge'] = pd.Series(np.random.randn(len(df)), index=df.index)
-#     df['discharge'] = pd.Series(np.random.randn(len(df)), index=df.index)
-#     cycle = []
-#     cycle = group['Cumu_count']
-#     df['Charge'][0:cycle[1]] = df['Charge_Capacity(Ah)'][0:cycle[1]]
-#     df['discharge'][0:cycle[1]] = df['Discharge_Capacity(Ah)'][0:cycle[1]]
-#     # Calculating net capacity using the calculated charge and discharge values.
-#     for i in range(1,len(cycle)):
-#         df['Charge'][cycle[i]:cycle[i+1]] = df['Charge_Capacity(Ah)'][cycle[i]:cycle[i+1]]-df['Charge_Capacity(Ah)'][cycle[i]]
-#         df['discharge'][cycle[i]:cycle[i+1]] = df['Discharge_Capacity(Ah)'][cycle[i]:cycle[i+1]]-df['Discharge_Capacity(Ah)'][cycle[i]]
-#     df['Capacity'] = pd.Series(np.random.randn(len(df)), index=df.index)
-#     df['Capacity'] = df['Charge'] - df['discharge']
     return df
