@@ -2,7 +2,7 @@
   "name": "BattDeg",
   "version": "1.0.0",
   "devDependencies": {
-    "grunt": "*",
+    "grunt": "^1.0.3",
     "grunt-contrib-watch": "*",
     "grunt-shell": "*"
   },
