@@ -1,7 +1,8 @@
-[run]
-branch = True
-source = battdeg/*
-include = battdeg/*
-omit = */setup.py
 [report]
-include = battdeg/*
+omit =  
+    */python?.?/*
+    */site-packages/nose/*
+    *__init__*
+    */setup.py
+exclude_lines =
+if __name__ == .__main__.:
