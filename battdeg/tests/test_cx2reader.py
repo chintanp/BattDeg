@@ -3,6 +3,7 @@ import numpy as np
 import datetime
 import os, sys
 import re
+import xlrd
 from os import listdir
 from os.path import isfile, join
 import matplotlib.pyplot as plt
