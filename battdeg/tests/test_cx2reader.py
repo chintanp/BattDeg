@@ -94,7 +94,7 @@ def test_file_name_sorting():
 
 # Test the output of the function 'reading_dataframes'
 file_names = file_name_sorting(file_name_list)
-Sheet_Name = 'Channel_1-006'
+Sheet_Name = 1
 path = data_path
 df = reading_dataframes(file_names, Sheet_Name, path)
 def test_reading_dataframes():
