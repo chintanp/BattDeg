@@ -179,6 +179,6 @@ def concat_df(df_dict):
             dataframe['Cycle_Index']=dataframe['Cycle_Index']+max(combined_dataframe['Cycle_Index'])
             combined_dataframe=combined_dataframe.append(dataframe)
     # get the data of capacity
-    combined_dataframe['Capacity']=combined_dataframe['charge_cycle_ah']-combined_dataframe['discharge_cycle_ah']
+    combined_dataframe['capacity_ah']=combined_dataframe['charge_cycle_ah']-combined_dataframe['discharge_cycle_ah']
     df_reset = combined_dataframe.reset_index(drop=True)
     return df_reset
