@@ -306,8 +306,8 @@ def test_model_training():
 	assert isinstance(model_loss, dict),'Loss function is not a dictionary'
 	assert yhat.shape[1] == 1,'The number of columns in the output is not 1 as expected'
 
-# Test the output of the function 'model_predict'
-y_predicted = model_prediction(formatted_df)
-def test_model_prediction():
-	assert isinstance(y_predicted, np.ndarray),'Response of the test dataset is not an array'
-	assert y_predicted.shape[1] == 1,'The number of columns in the output is not 1 as expected'
+# # Test the output of the function 'model_predict'
+# y_predicted = model_prediction(formatted_df)
+# def test_model_prediction():
+# 	assert isinstance(y_predicted, np.ndarray),'Response of the test dataset is not an array'
+# 	assert y_predicted.shape[1] == 1,'The number of columns in the output is not 1 as expected'
