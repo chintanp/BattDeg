@@ -505,12 +505,12 @@ def concat_df(df_dict):
     df_concat = None
     for data in df_dict:
         if df_concat is None:
-            df_next = data
+            df_next = df_dict[data]
             df_concat = pd.DataFrame(data=None, columns=df_next.columns)
             # df_next['Cycle'] = df_next['Cycle'] + max(df_pl12['Cycle'])
             df_concat = pd.concat([df_concat, df_next])
         else:
-            df_next = data
+            df_next = df_dict[data]
             df_next['Cycle_Index'] = np.array(
                 df_next['Cycle_Index']) + max(np.array(df_concat['Cycle_Index']))
             df_next['Test_Time(s)'] = np.array(
