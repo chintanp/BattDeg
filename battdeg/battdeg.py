@@ -235,7 +235,7 @@ def get_cycle_capacities(df_out):
     # But the machine learning algorithm should consider these as outliers and
     # hopefully get over it. We can come back and correct this.
     df_out_indexed['capacity_ah'] = charge_cycle_ah - discharge_cycle_ah
-
+    df_out_indexed.rename(columns={'Current_Amp':'Current(A)','Voltage_Volt':'Voltage(V)'})
     return df_out_indexed
 
 # @profile
@@ -316,10 +316,10 @@ def model_training(data_dir, file_name_format, sheet_name):
         # (The input has to be the time series cycling data including values of
         #  Current, Voltage and Discharge Capacity)
     """
-    # The function 'file_reader' is used to read all the excel files
+    # The function 'cx2_file_reader' is used to read all the excel files
     # in the given path and convert the given cumulative data into individual
     # cycle data.
-    individual_cycle_data = file_reader(data_dir, file_name_format, sheet_name)
+    individual_cycle_data = cx2_file_reader(data_dir, file_name_format, sheet_name)
 
     # The function 'data_formatting' is used to drop the unnecesary columns
     # from the training data i.e. only the features considered in the model
@@ -362,14 +362,16 @@ def model_prediction(input_data):
     learning_df = learning_df.reshape(
         (learning_df.shape[0], 1, learning_df.shape[1]))
     # Predicting the discharge values using the saved LSTM model.
-    model = load_model('lstm_trained_model.h5')
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = join(module_dir,'models')
+    model = load_model(join(model_path,'lstm_trained_model.h5'))
     y_predicted = model.predict(learning_df)
     return y_predicted
 
 
 # Wrapping function only to merge and convert cumulative data to
 # individual cycle data.
-def file_reader(data_dir, file_name_format, sheet_name):
+def cx2_file_reader(data_dir, file_name_format, sheet_name):
     """
     This function reads in the data for CX2 samples experiment and returns
     a well formatted dataframe with cycles in ascending order.
@@ -377,6 +379,7 @@ def file_reader(data_dir, file_name_format, sheet_name):
     Args:
     data_dir (string): This is the absolute path to the data directory.
     file_name_format (string): Format of the filename, used to deduce other files.
+    sheet_name (string): Sheet name containing the data in the excel file.
 
     Returns:
     The complete test data in a dataframe with extra column for capacity in Ah.
@@ -587,7 +590,7 @@ def data_formatting(merged_df):
 
     Args:
         merged_df(dataframe): The merged dataframe which can be obtained by using the
-        function 'CX2_sample_file_reader'
+        function 'cx2_file_reader'
 
     Returns:
         A numpy array with only values required to frame a time series as a
@@ -683,3 +686,37 @@ def long_short_term_memory(model_data):
     yhat = model.predict(test_x)
     # model.save('lstm_trained_model.h5')
     return model_loss, yhat
+
+def file_reader(data_dir, file_name_format, sheet_name, ignore_file_indices):
+    """
+    This function reads PL sample, CX2 and CS2 files and returns a nice 
+    dataframe with cyclic values of charge and discharge capacity with 
+    cycles in ascending order
+    
+    Args:
+    data_dir (string): This is the absolute path to the data directory.
+    file_name_format (string): Format of the filename, used to deduce other files.
+    sheet_name (string): Sheet name containing the data in the excel file.
+    ignore_file_indices (list, int): This list of ints tells which to ignore.
+
+    Returns:
+    The complete test data in a dataframe with extra column for capacity in Ah.
+    """
+
+    # For excel files (CX2 and CS2 datafiles), the function 'cx2_file_reader'
+    # is used.
+    if file_name_format[:3] == 'CX2' or file_name_sorting[:3] == 'CS2':
+        df_output = cx2_file_reader(data_dir,file_name_format,sheet_name) 
+    else:
+        df_output = pl_samples_file_reader(data_dir,file_name_format,ignore_file_indices)
+   
+    # The function 'data_formatting' is used to drop the unnecesary columns
+    # from the training data i.e. only the features considered in the model
+    # (Current, Voltage and Discharge capacity) are retained.
+    formatted_data = data_formatting(df_output)
+
+    # The function 'series_to_supervised' is used to frame the time series training
+    # data as supervised learning dataset.
+    df_out = series_to_supervised(
+        formatted_data, n_in=1, n_out=1, dropnan=True)
+    return df_out
