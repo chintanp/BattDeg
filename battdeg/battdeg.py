@@ -602,13 +602,16 @@ def data_formatting(merged_df):
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     """
     Frame a time series as a supervised learning dataset.
+    
     Arguments:
         data: Sequence of observations as a list or NumPy array.
         n_in: Number of lag observations as input (X).
         n_out: Number of observations as output (y).
         dropnan: Boolean whether or not to drop rows with NaN values.
+    
     Returns:
         Pandas DataFrame of series framed for supervised learning.
+    
     """
     n_vars = 1 if isinstance(data, list) else data.shape[1]
     df_data = pd.DataFrame(data)
