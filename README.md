@@ -12,14 +12,20 @@
 
 The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group [website](https://web.calce.umd.edu/batteries/data.htm)
 
-* Input data format
+For a new dataset, below are the usage instructions:  
+* Input data format   
 In the input dataframe, the essential columns must be named as below:
-|Data                     |Column Name    |
-|-------------------------|---------------|
-| Current                 | Current(A)    |
-| Voltage                 | Voltage(V)    |
-| Discharge Capacity(Ah)  | Discharge_Ah  |
-| Charge Capacity(Ah)     | Charge_Ah     |
+
+| Data                   | Column Name  |
+|------------------------|--------------|
+| Current                | Current(A)   |
+| Voltage                | Voltage(V)   |
+| Discharge capacity(Ah) | Discharge_Ah |
+| Charge capacity(Ah)    | Charge_Ah    |
+
+* If the data is not cumulative, the dataframe can be formatted as required for use by 'model_prediction' by using the following function:  
+
+1.`data_formatting()` : This function drops all the unnecessary columns in the input dataframe and prepares the dataframe for use by 'model_prediction' function.
 
 This Python package contains following functions: 
 
@@ -39,4 +45,5 @@ This Python package contains following functions:
 
 1. Convert the files from .mat format to .csv in Python. 
 2. Include ability to train for multiple chemistries, voltage windows etc. 
-3. 
+3. Deploy the solution as a web-service and create a web-UI. 
+
