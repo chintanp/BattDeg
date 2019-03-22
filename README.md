@@ -17,10 +17,6 @@ To install, use `pip install battdeg`, and then you can import the module `battd
 
 ## Usage 
 
-The module is still under development and API may change over time. Currently: 
-1. Get the CALCE data and unzip it. 
-2. Read in the CALCE data. The cycling data available from CALCE is separated into files. The file_reader() functions provide the capability of reading the files and creating a dataframe from data from all files. 
-
 The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group [website](https://web.calce.umd.edu/batteries/data.htm)
 
 This Python package contains following functions: 
@@ -43,7 +39,7 @@ In the input dataframe, the essential columns must be named as below:
 
 * If the data is not cumulative, the dataframe can be formatted as required for use by 'model_prediction' by using the following function:  
 
-1.`data_formatting()` : This function drops all the unnecessary columns in the input dataframe and prepares the dataframe for use by 
+3.`data_formatting()` : This function drops all the unnecessary columns in the input dataframe and prepares the dataframe for use by 
 
 
 
