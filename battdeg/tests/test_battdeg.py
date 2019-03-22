@@ -120,6 +120,17 @@ def test_date_time_converter_BadIn():
         
     return
 
+# Test the value of the date time returned is correct 
+# Ideally should be done through hypothesis
+def test_date_time_converter_value():
+    
+    dt_in = [731885.75]
+    
+    result = date_time_converter(dt_in)
+    
+    assert result == [datetime.datetime(2003, 10, 31, 18, 0)], "The date time returned is not correct" 
+    
+    return
 
 ###########################################################################
 ####################### Tests for `get_dict_files()` ################
