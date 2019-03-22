@@ -387,7 +387,6 @@ def cx2_file_reader(data_dir, file_name_format, sheet_name):
     """
     # Raise an exception if the type of the inputs is not correct
     if not isinstance(data_dir, str):
-        print(data_dir)
         raise TypeError('data_dir is not of type string')
 
     if not isinstance(file_name_format, str):

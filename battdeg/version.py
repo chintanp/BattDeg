@@ -3,7 +3,7 @@ from os.path import join as pjoin
 # Format expected by setup.py and doc/source/conf.py: string of form "X.Y.Z"
 _version_major = 0
 _version_minor = 1
-_version_micro = ''  # use '' for first of series, number for 1 and above
+_version_micro = '3'  # use '' for first of series, number for 1 and above
 _version_extra = 'dev'
 # _version_extra = ''  # Uncomment this for full releases
 
@@ -16,7 +16,7 @@ if _version_extra:
 
 __version__ = '.'.join(map(str, _ver))
 
-CLASSIFIERS = ["Development Status :: Alpha",
+CLASSIFIERS = ["Development Status :: 3 - Alpha",
                "Environment :: Console",
                "Intended Audience :: Science/Research",
                "License :: OSI Approved :: MIT License",
@@ -64,4 +64,4 @@ MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
 PACKAGE_DATA = {'battdeg': [pjoin('data', '*')]}
-REQUIRES = [""]
+REQUIRES = ["pandas", "numpy", "sklearn", "keras", "pytest"]

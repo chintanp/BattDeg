@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     },
     shell: {
       test: {
-        command: 'pytest'
+        command: 'coverage run --source=battdeg -m pytest .'
       }
     }
   });

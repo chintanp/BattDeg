@@ -5,8 +5,6 @@ import os, sys
 import re
 from os import listdir
 from os.path import isfile, join
-import matplotlib.pyplot as plt
-import seaborn as sns
 import pytest # automatic test finder and test runner
 
 # To import files from the parent directory 
@@ -222,16 +220,16 @@ def test_get_cycle_capacities_Type():
 ###########################################################################
 
 # This test will test the function `cx2_file_reader` for bad input
-def test_cx2_file_reader():
+def test_cx2_file_reader_BadIn():
 
 	#Inputs with wrong type for data_dir
 	dd1 = 12
-	fnf1 = 'CX2_16_1_30_12.xlsx'
+	fnf1 = 'CX2_16'
 	sn1 = 1
 
 	#Input with wrong type of sheet name
 	dd2 = data_path_cx2
-	fnf2 = 'CX2_16_1_30_12.xlsx'
+	fnf2 = 'CX2_16'
 	sn2 = 123.5
 
 	#Input with wrong type of file name format
@@ -306,6 +304,12 @@ training_data = series_to_supervised(formatted_df)
 def test_series_to_supervised():
 	assert isinstance(training_data, pd.DataFrame),'Output is not a dataframe'
 	assert len(training_data.columns) == 4,'The number of columns in the output is not 4 as expected'
+	
+# Test the output of the function 'series_to_supervised' for n_out=2
+# This will test the else condition
+training_data2 = series_to_supervised(formatted_df, n_out=2)
+def test_series_to_supervised2():
+	assert isinstance(training_data2, pd.DataFrame),'Output is not a dataframe'
 
 # Test the output of the function 'long_short_term_memory'
 model_loss, yhat = long_short_term_memory(training_data)
