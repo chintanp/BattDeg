@@ -18,7 +18,7 @@ from battdeg import date_time_converter
 from battdeg import get_dict_files
 from battdeg import concat_dict_dataframes
 from battdeg import get_cycle_capacities
-from battdeg import file_reader
+from battdeg import cx2_file_reader
 from battdeg import file_name_sorting
 from battdeg import reading_dataframes
 from battdeg import concat_df
@@ -28,12 +28,14 @@ from battdeg import series_to_supervised
 from battdeg import long_short_term_memory
 from battdeg import model_training
 from battdeg import model_prediction
+from battdeg import file_reader
 
 # Path for data for testing
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 module_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = join(module_dir,'models')
 data_path = join(module_dir, 'data')
-data_path_pl12_14 = data_path
+data_path_pl12_14 = join(data_path,'PL12')
 
 ###########################################################################
 ####################### Tests for `pl_samples_file_reader` ################
@@ -204,24 +206,24 @@ def test_get_cycle_capacities_Type():
     return
 
 ###########################################################################
-####################### Tests for `file_reader` ###########################
+####################### Tests for `cx2_file_reader` ###########################
 ###########################################################################
 
-# This test will test the function `file_reader` for bad input
-def test_file_reader():
+# This test will test the function `cx2_file_reader` for bad input
+def test_cx2_file_reader():
 
 	#Inputs with wrong type for data_dir
 	dd1 = 12
-	fnf1 = 'data'
+	fnf1 = 'CX2_16'
 	sn1 = 1
 
 	#Input with wrong type of sheet name
-	dd1 = module_dir
-	fnf2 = 'data'
+	dd1 = data_path
+	fnf2 = 'CX2_16'
 	sn2 = 123.5
 
 	#Input with wrong type of file name format
-	dd3 = module_dir
+	dd3 = data_path
 	fnf2 = 'abc'
 	sn3 = 1
 
@@ -232,31 +234,32 @@ def test_file_reader():
 
 	#The wrong type input should raise a TypeError
 	with pytest.raises(TypeError):
-		file_reader(dd1, fnf1, sn1)
+		cx2_file_reader(dd1, fnf1, sn1)
 
 	with pytest.raises(TypeError):
-		file_reader(dd2, fnf2, sn2)
+		cx2_file_reader(dd2, fnf2, sn2)
 
 	with pytest.raises(TypeError):
-		file_reader(dd3, fnf3, sn3)
+		cx2_file_reader(dd3, fnf3, sn3)
 
 	with pytest.raises(FileNotFoundError):
-		file_reader(dd5, fnf5, sn4)
+		cx2_file_reader(dd5, fnf5, sn4)
 
 	return
 
 # Test the output type of the function
 #Correct inputs
-dd = module_dir
-fnf = 'data'
+dd = data_path
+fnf = 'CX2_16'
+data_path_cx2_16 = join(data_path,'CX2_16')
 sn = 1
 # Run the function with these inputs
-result = file_reader(dd, fnf, sn)
-def test_file_reader():
+result = cx2_file_reader(dd, fnf, sn)
+def test_cx2_file_reader():
 	assert isinstance(result,pd.DataFrame), 'Output is not a dataframe'
 
 # Test the output of the function 'file_name_sorting'
-files = listdir(data_path)
+files = listdir(data_path_cx2_16)
 file_name_list = list(filter(lambda x: x[-5:]=='.xlsx' , files))
 def test_file_name_sorting():
 	sorted_list = file_name_sorting(file_name_list)
@@ -265,7 +268,7 @@ def test_file_name_sorting():
 # Test the output of the function 'reading_dataframes'
 file_names = file_name_sorting(file_name_list)
 Sheet_Name = 1
-path = data_path
+path = join(data_path,'CX2_16')
 df = reading_dataframes(file_names, Sheet_Name, path)
 def test_reading_dataframes():
 	assert isinstance(df, dict), 'Output is not a dictionary of dataframes'
@@ -307,7 +310,17 @@ def test_model_training():
 	assert yhat.shape[1] == 1,'The number of columns in the output is not 1 as expected'
 
 # # Test the output of the function 'model_predict'
-# y_predicted = model_prediction(formatted_df)
-# def test_model_prediction():
-# 	assert isinstance(y_predicted, np.ndarray),'Response of the test dataset is not an array'
-# 	assert y_predicted.shape[1] == 1,'The number of columns in the output is not 1 as expected'
+y_predicted = model_prediction(formatted_df)
+def test_model_prediction():
+	assert isinstance(y_predicted, np.ndarray),'Response of the test dataset is not an array'
+	assert y_predicted.shape[1] == 1,'The number of columns in the output is not 1 as expected'
+
+# Test the output of the function 'file_reader'
+file_indices1 = [1, 2, 3]
+sheet_name = 1
+data_dir = data_path
+file_name_format = 'CX2_16'
+df_output = file_reader(data_dir, file_name_format, sheet_name, file_indices1)
+def test_file_reader():
+   assert isinstance(df_output,pd.DataFrame), 'Output is not a dataframe'
+   assert len(df_output.columns) == 4,'The number of columns in the output is not 4 as expected'
