@@ -14,12 +14,12 @@ The functions are written according to the datafiles available for PL samples, C
 
 * Input data format
 In the input dataframe, the essential columns must be named as below:
-|Data   |Column Name|
-|---|---|
-| Current  | Current(A)  |
-| Voltage  | Voltage(V)  |
+|Data                     |Column Name    |
+|-------------------------|---------------|
+| Current                 | Current(A)    |
+| Voltage                 | Voltage(V)    |
 | Discharge Capacity(Ah)  | Discharge_Ah  |
-| Charge Capacity(Ah) | Charge_Ah |
+| Charge Capacity(Ah)     | Charge_Ah     |
 
 This Python package contains following functions: 
 
