@@ -235,7 +235,8 @@ def get_cycle_capacities(df_out):
     # But the machine learning algorithm should consider these as outliers and
     # hopefully get over it. We can come back and correct this.
     df_out_indexed['capacity_ah'] = charge_cycle_ah - discharge_cycle_ah
-    df_out_indexed.rename(columns={'Current_Amp':'Current(A)','Voltage_Volt':'Voltage(V)'})
+    df_out_indexed.rename(columns={'Current_Amp':'Current(A)','Voltage_Volt':'Voltage(V)'},
+                          inplace=True)
     return df_out_indexed
 
 # @profile
@@ -633,6 +634,9 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     if dropnan:
         sl_df.dropna(inplace=True)
     sl_df.drop(sl_df.columns[[3, 4]], axis=1, inplace=True)
+    sl_df.rename(columns={'var1(t-1)':'Current(t-1)','var2(t-1)':'Voltage(t-1)',
+                 'var3(t-1)':'discharge_capacity(t-1)','var3(t)':'discharge_capacity(t)'},
+                 inplace = True)
     return sl_df
 
 
@@ -704,7 +708,7 @@ def file_reader(data_dir, file_name_format, sheet_name, ignore_file_indices):
 
     # For excel files (CX2 and CS2 datafiles), the function 'cx2_file_reader'
     # is used.
-    if file_name_format[:3] == 'CX2' or file_name_sorting[:3] == 'CS2':
+    if file_name_format[:3] == 'CX2' or file_name_format[:3] == 'CS2':
         df_output = cx2_file_reader(data_dir,file_name_format,sheet_name) 
     else:
         df_output = pl_samples_file_reader(data_dir,file_name_format,ignore_file_indices)
@@ -716,6 +720,6 @@ def file_reader(data_dir, file_name_format, sheet_name, ignore_file_indices):
 
     # The function 'series_to_supervised' is used to frame the time series training
     # data as supervised learning dataset.
-    df_out = series_to_supervised(
-        formatted_data, n_in=1, n_out=1, dropnan=True)
-    return df_out
+    # df_out = series_to_supervised(
+    #     formatted_data, n_in=1, n_out=1, dropnan=True)
+    return formatted_data
