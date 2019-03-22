@@ -2,17 +2,25 @@
 
 # BattDeg
 
-## Usecases for the project
 
-* To predict the degradation in a lithium-ion battery using the few cycles of usage. 
+## Introduction
 
-## Components
+Lithium-ion batteries degrade during in any application, be it a cell-phone or a laptop, or an electric vehicle. 
+While the exact cause of degradation is not fully understood, it is known to be affected by the operating conditions like 
+charge/discharge current, temperature etc. With `battdeg` we are trying to predict the degradation in a battery given a few cycles of operation. 
+We use a seq2seq LSTM model in Keras to do the prediction and the model has been trained on the CALCE data. The users can also train the models using their own dataset for their batteries
+and operating conditions. 
 
-## Usage Instructions 
+## Installation 
 
-This Python package contains following functions: 
+To install, use `pip install battdeg`, and then you can import the module `battdeg` in your python script or jupyter notebook.
 
-1. `PL_samples_file_reader()`: This function reads the files from PL_samples experiment. TODO: Test for other files this PL12 14 folder, then other folders in PL_samples experiment. Then work on optimization. 
+## Usage 
+
+The module is still under development and API may change over time. Currently: 
+1. Get the CALCE data and unzip it. 
+2. Read in the CALCE data. The cycling data available from CALCE is separated into files. The file_reader() functions provide the capability of reading the files and creating a dataframe from data from all files. 
+3. 
 
 
 ## For development
@@ -25,6 +33,3 @@ This Python package contains following functions:
 
 ## Future Scope 
 
-1. Convert the files from .mat format to .csv in Python. 
-2. Include ability to train for multiple chemistries, voltage windows etc. 
-3. 

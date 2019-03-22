@@ -222,16 +222,16 @@ def test_get_cycle_capacities_Type():
 ###########################################################################
 
 # This test will test the function `cx2_file_reader` for bad input
-def test_cx2_file_reader():
+def test_cx2_file_reader_BadIn():
 
 	#Inputs with wrong type for data_dir
 	dd1 = 12
-	fnf1 = 'CX2_16_1_30_12.xlsx'
+	fnf1 = 'CX2_16'
 	sn1 = 1
 
 	#Input with wrong type of sheet name
 	dd2 = data_path_cx2
-	fnf2 = 'CX2_16_1_30_12.xlsx'
+	fnf2 = 'CX2_16'
 	sn2 = 123.5
 
 	#Input with wrong type of file name format
