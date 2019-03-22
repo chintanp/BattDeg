@@ -6,3 +6,4 @@ omit =
     */setup.py
     *tests*
     */tests*
+    */version.py
