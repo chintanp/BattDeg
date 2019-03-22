@@ -10,7 +10,16 @@
 
 ## Usage Instructions 
 
-*The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group website[https://web.calce.umd.edu/batteries/data.htm]
+The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group [website](https://web.calce.umd.edu/batteries/data.htm)
+
+* Input data format
+In the input dataframe, the essential columns must be named as below:
+|Data   |Column Name|
+|---|---|
+| Current  | Current(A)  |
+| Voltage  | Voltage(V)  |
+| Discharge Capacity(Ah)  | Discharge_Ah  |
+| Charge Capacity(Ah) | Charge_Ah |
 
 This Python package contains following functions: 
 
