@@ -340,3 +340,12 @@ df_output = file_reader(data_dir, file_name_format, sheet_name, file_indices1)
 def test_file_reader():
    assert isinstance(df_output,pd.DataFrame), 'Output is not a dataframe'
    assert len(df_output.columns) == 4,'The number of columns in the output is not 4 as expected'
+
+# Correct inputs - to test for the `else` in file_reader
+dd1 = data_path_pl12_14
+file_name_format_PL = 'PL12(4).csv'
+file_indices1 = [1, 2, 3]
+df_output2 = file_reader(data_path_pl12_14, file_name_format_PL, sheet_name, file_indices1)
+
+def test_file_reader2():
+   assert isinstance(df_output2, pd.DataFrame), 'Output is not a dataframe'

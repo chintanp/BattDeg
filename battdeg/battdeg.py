@@ -23,8 +23,6 @@ from keras.layers import LSTM
 from keras.models import load_model
 
 # @profile
-
-
 def date_time_converter(date_time_list):
     """
     This function gets the numpy array with date_time in matlab format
@@ -125,7 +123,7 @@ def concat_dict_dataframes(dict_ord_cycling_data):
     if not isinstance(dict_ord_cycling_data, dict):
         raise TypeError('dict_ord_cycling_data is not of type dict')
 
-    print(dict_ord_cycling_data.keys())
+    #print(dict_ord_cycling_data.keys())
     for i in dict_ord_cycling_data.keys():
         # Raise an exception if the type of the keys is not integers
         # print(type(i))
@@ -592,8 +590,9 @@ def data_formatting(merged_df):
         A numpy array with only values required to frame a time series as a
         supervised learning dataset.
     """
-    column_names = ['Current(A)', 'Voltage(V)', 'discharge_cycle_ah']
-    merged_df = merged_df[column_names]
+    # Get the columns containing text 'Current', 'Voltage' and
+    # 'discharge_cycle_ah'
+    merged_df = merged_df.filter(regex='Current|Voltage|discharge_cycle_ah')
     formatted_df = merged_df.astype('float32')
     return formatted_df
 
@@ -662,7 +661,7 @@ def long_short_term_memory(model_data):
     # reshape input to be 3D [samples, timesteps, features]
     train_x = train_x.reshape((train_x.shape[0], 1, train_x.shape[1]))
     test_x = test_x.reshape((test_x.shape[0], 1, test_x.shape[1]))
-    print(train_x.shape, train_y.shape, test_x.shape, test_y.shape)
+    # print(train_x.shape, train_y.shape, test_x.shape, test_y.shape)
 
     # Designing the network
     model = Sequential()
@@ -704,7 +703,7 @@ def file_reader(data_dir, file_name_format, sheet_name, ignore_file_indices):
 
     # For excel files (CX2 and CS2 datafiles), the function 'cx2_file_reader'
     # is used.
-    if file_name_format[:3] == 'CX2' or file_name_sorting[:3] == 'CS2':
+    if file_name_format[:3] == 'CX2' or file_name_format[:3] == 'CS2':
         df_output = cx2_file_reader(data_dir,file_name_format,sheet_name) 
     else:
         df_output = pl_samples_file_reader(data_dir,file_name_format,ignore_file_indices)
