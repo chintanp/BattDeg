@@ -10,7 +10,8 @@ Welcome to BattDeg's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+Start by reading the README.md file here: https://github.com/chintanp/BattDeg/blob/master/README.md and then check out the usage in 
+examples folder. 
 
 Indices and tables
 ==================
