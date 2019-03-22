@@ -323,4 +323,4 @@ file_name_format = 'CX2_16'
 df_output = file_reader(data_dir, file_name_format, sheet_name, file_indices1)
 def test_file_reader():
    assert isinstance(df_output,pd.DataFrame), 'Output is not a dataframe'
-   assert len(df_output.columns) == 4,'The number of columns in the output is not 4 as expected'
+   assert len(df_output.columns) == 3,'The number of columns in the output is not 3 as expected'
