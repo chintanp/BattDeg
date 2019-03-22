@@ -218,7 +218,7 @@ def test_cx2_file_reader():
 	sn1 = 1
 
 	#Input with wrong type of sheet name
-	dd1 = data_path
+	dd2 = data_path
 	fnf2 = 'CX2_16'
 	sn2 = 123.5
 
