@@ -386,16 +386,13 @@ def cx2_file_reader(data_dir, file_name_format, sheet_name):
     """
     # Raise an exception if the type of the inputs is not correct
     if not isinstance(data_dir, str):
+        print(data_dir)
         raise TypeError('data_dir is not of type string')
 
     if not isinstance(file_name_format, str):
         raise TypeError('file_name_format is not of type string')
 
-    if not isinstance(sheet_name, str):
-        pass
-    elif not isinstance(sheet_name, int):
-        pass
-    else:
+    if not isinstance(sheet_name, (str, int)):
         raise TypeError('Sheet_Name format is not of type string or integer')
 
     if not os.path.exists(join(data_dir, file_name_format)):
