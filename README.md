@@ -10,9 +10,12 @@
 
 ## Usage Instructions 
 
+*The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group website[https://web.calce.umd.edu/batteries/data.htm]
+
 This Python package contains following functions: 
 
-1. `PL_samples_file_reader()`: This function reads the files from PL_samples experiment. TODO: Test for other files this PL12 14 folder, then other folders in PL_samples experiment. Then work on optimization. 
+1. `file_reader()`: This function can be used to format the input dataframe such that it can be used by the 'model_prediction' function. 
+2. `model_prediction()`: This function takes the formatted dataframe and predicts the discharge capacity values.
 
 
 ## For development
