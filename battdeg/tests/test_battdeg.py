@@ -36,6 +36,7 @@ module_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 model_path = join(module_dir,'models')
 data_path = join(module_dir, 'data')
 data_path_pl12_14 = join(data_path,'PL12')
+data_path_cx2 = join(data_path,'CX2_16')
 
 ###########################################################################
 ####################### Tests for `pl_samples_file_reader` ################
@@ -120,6 +121,17 @@ def test_date_time_converter_BadIn():
         
     return
 
+# Test the value of the date time returned is correct 
+# Ideally should be done through hypothesis
+def test_date_time_converter_value():
+    
+    dt_in = [731885.75]
+    
+    result = date_time_converter(dt_in)
+    
+    assert result == [datetime.datetime(2003, 10, 31, 18, 0)], "The date time returned is not correct" 
+    
+    return
 
 ###########################################################################
 ####################### Tests for `get_dict_files()` ################
@@ -214,21 +226,21 @@ def test_cx2_file_reader():
 
 	#Inputs with wrong type for data_dir
 	dd1 = 12
-	fnf1 = 'CX2_16'
+	fnf1 = 'CX2_16_1_30_12.xlsx'
 	sn1 = 1
 
 	#Input with wrong type of sheet name
-	dd2 = data_path
-	fnf2 = 'CX2_16'
+	dd2 = data_path_cx2
+	fnf2 = 'CX2_16_1_30_12.xlsx'
 	sn2 = 123.5
 
 	#Input with wrong type of file name format
-	dd3 = data_path
-	fnf2 = 'abc'
+	dd3 = data_path_cx2
+	fnf3 = 123
 	sn3 = 1
 
 	#Input with wrong file not found error
-	dd4 = data_path
+	dd4 = data_path_cx2
 	fnf4 = "abc"
 	sn4 = 1
 
@@ -243,7 +255,7 @@ def test_cx2_file_reader():
 		cx2_file_reader(dd3, fnf3, sn3)
 
 	with pytest.raises(FileNotFoundError):
-		cx2_file_reader(dd5, fnf5, sn4)
+		cx2_file_reader(dd4, fnf4, sn4)
 
 	return
 
