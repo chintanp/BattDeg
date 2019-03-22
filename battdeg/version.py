@@ -64,4 +64,4 @@ MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
 PACKAGE_DATA = {'battdeg': [pjoin('data', '*')]}
-REQUIRES = ["pandas", "numpy", "sklearn", "keras", "pytest"]
+REQUIRES = ["pandas", "numpy", "sklearn", "keras", "tensorflow", "pytest"]
