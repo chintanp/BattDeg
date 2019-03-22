@@ -24,6 +24,8 @@ This Python package contains following functions:
 1. `file_reader()`: This function can be used to format the input dataframe such that it can be used by the 'model_prediction' function. 
 2. `model_prediction()`: This function takes the formatted dataframe and predicts the discharge capacity values.
 
+**The jupyter notebooks 'WorkingWithCX2', 'WorkingWithCX2' and 'WorkingWithPL' in the examples directory show the usage of the above mentioned functions.**
+
 For a new dataset, below are the usage instructions:  
 * Input data format   
 In the input dataframe, the essential columns must be named as below:
