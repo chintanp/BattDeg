@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Lithium-ion batteries degrade during in any application, be it a cell-phone or a laptop, or an electric vehicle. 
+Lithium-ion batteries degrade during any application, be it a cell-phone or a laptop, or an electric vehicle. 
 While the exact cause of degradation is not fully understood, it is known to be affected by the operating conditions like 
 charge/discharge current, temperature etc. With `battdeg` we are trying to predict the degradation in a battery given a few cycles of operation. 
 We use a seq2seq LSTM model in Keras to do the prediction and the model has been trained on the CALCE data. The users can also train the models using their own dataset for their batteries
@@ -17,7 +17,7 @@ To install, use `pip install battdeg`, and then you can import the module `battd
 
 ## Usage 
 
-The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells available on the Center for  Advanced Life Cycle Engineering(CALCE) Battery Research Group [website](https://web.calce.umd.edu/batteries/data.htm)
+The functions are written according to the datafiles available for PL samples, CX2 and CS2 cells on the Center for Advanced Life Cycle Engineering(CALCE) Battery Research Group [website](https://web.calce.umd.edu/batteries/data.htm)
 
 This Python package contains following functions: 
 
@@ -41,7 +41,7 @@ In the input dataframe, the essential columns must be named as below:
 
 * If the data is not cumulative, the dataframe can be formatted as required for use by 'model_prediction' by using the following function:  
 
-3.`data_formatting()` : This function drops all the unnecessary columns in the input dataframe and prepares the dataframe for use by 
+3.`data_formatting()` : This function drops all the unnecessary columns in the input dataframe and prepares the dataframe for use by the function `file_reader()`
 
 
 
